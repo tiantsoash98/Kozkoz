@@ -6,17 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
-@Document(collection = "activite")
-public class Activite {
-    public  static  int DISCRET = 10;
-    public  static  int VISIBLE = 20;
-
+@Document(collection = "historiqueUtilisation")
+public class HistoriqueUtilisation {
     private UtilisateurMessage utilisateur;
-    private Localisation localisation;
-    private int etat;
-    private String statut;
+    private Date debut;
+    private Localisation localisationDebut;
+    private Date fin;
+    private Localisation localisationFin;
 }
