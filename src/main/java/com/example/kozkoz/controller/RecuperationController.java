@@ -6,6 +6,9 @@ import com.example.kozkoz.mapping.utilitaires.Configuration;
 import com.example.kozkoz.mapping.utilitaires.Utilitaire;
 import com.example.kozkoz.service.RecuperationService;
 import com.example.kozkoz.service.UtilisateurService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,9 +24,13 @@ public class RecuperationController {
     private UtilisateurService utilisateurService;
     private RecuperationService recuperationService;
 
-    public RecuperationController(UtilisateurService utilisateurService, RecuperationService recuperationService) {
+    //@Autowired
+    private MailSender mailSender;
+
+    public RecuperationController(UtilisateurService utilisateurService, RecuperationService recuperationService, MailSender mailSender) {
         this.recuperationService = recuperationService;
         this.utilisateurService = utilisateurService;
+        this.mailSender = mailSender;
     }
 
     @RequestMapping("/recuperation")
@@ -48,20 +55,20 @@ public class RecuperationController {
             String objet = "Récupération du mot de passe de votre compte InMalaz";
             String text = "Voici le code de récupération de votre compte InMalaz : " + code;
 
-            if(Utilitaire.sendMail(Configuration.SmtpServer, Configuration.EmailExpediteur, receveur, objet, text))
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setText(text);
+            message.setSubject(objet);
+            message.setTo(receveur);
+
+            mailSender.send(message);
+            //if(Utilitaire.sendMail(Configuration.SmtpServer, Configuration.EmailExpediteur, receveur, objet, text))
                 return Utilitaire.getJSONStatus(3);
-        }
-        catch (AddressException e) {
-            return Utilitaire.getJSONStatus(1);
-        }
-        catch (MessagingException e) {
-            return Utilitaire.getJSONStatus(1);
         }
         catch (Exception e){
             return Utilitaire.getJSONStatus(1);
         }
 
-        return Utilitaire.getJSONStatus(2);
+        //return Utilitaire.getJSONStatus(2);
     }
 
     @RequestMapping("/verification-code")
