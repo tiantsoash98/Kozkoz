@@ -19,8 +19,8 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 public class ChatController {
-    SimpMessagingTemplate messagingTemplate;
-    MongoTemplate template;
+    private SimpMessagingTemplate messagingTemplate;
+    private MongoTemplate template;
 
     @Autowired
     public ChatController (SimpMessagingTemplate messagingTemplate, MongoTemplate template){
@@ -42,7 +42,7 @@ public class ChatController {
 
     @MessageMapping("/send/bip")
     public void onReceiveBip(Bip bip){
-        template.save(bip);
+        //template.save(bip);
         this.messagingTemplate.convertAndSend("/listen/bip/"+bip.getDestinataire().getId(), bip);
     }
 
