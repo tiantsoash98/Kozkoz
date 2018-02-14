@@ -1,0 +1,35 @@
+<div style="position:absolute;width:100%;height:100%;background-image: url('../assets/images/backgroundLogin.png');background-size:100% auto; ">
+  <div class="container" >
+      <div class="row vertical-offset-100">
+        <div class="col-md-4 col-md-offset-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"> votre compte</h3>
+           </div>
+            <div class="panel-body">
+              <form  accept-charset="UTF-8" role="form" >
+                      <fieldset>
+                  <div class="form-group">
+                    <input class="form-control" placeholder="E-mail" [(ngModel)]="loginData.email" name="email" type="email">
+                </div>
+                <div class="form-group">
+                  <input class="form-control" placeholder="mot de passe" [(ngModel)]="loginData.password" name="password" type="password" value="">
+                </div>
+                
+                <input class="btn btn-lg btn-success btn-block" type="submit" (click)="login()" value="se connecter">
+              
+              <div class="checkbox">
+                  <label>
+                    <input name="remember" type="text" value="Remember Me"> Vous n'avez pas encore de compte?
+                  </label>
+              </div>
+            <a routerLink="/inscription" ><button class="btn btn-lg btn-primary btn-block" value="s'inscrire">s'inscrire</button> </a>
+                
+            </fieldset>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
