@@ -22,9 +22,9 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 public class ActiviteController {
-    ActiviteService activiteService;
-    SimpMessagingTemplate messagingTemplate;
-    MongoTemplate template;
+    private ActiviteService activiteService;
+    private SimpMessagingTemplate messagingTemplate;
+    private MongoTemplate template;
 
 
     public  ActiviteController(ActiviteService activiteService, MongoTemplate template, SimpMessagingTemplate messagingTemplate){
@@ -66,5 +66,10 @@ public class ActiviteController {
             return null;
 
         return activiteService.getListActifs(new Localisation(lng, lat), Configuration.DefaultAreaSize);
+    }
+
+    @RequestMapping("/activite")
+    public Activite getActivite(@RequestParam String email){
+        return template.findOne(new Query(Criteria.where("utilisateur.email").is(email)), Activite.class);
     }
 }
