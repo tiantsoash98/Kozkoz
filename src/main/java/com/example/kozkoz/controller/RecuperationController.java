@@ -65,8 +65,7 @@ public class RecuperationController {
                 return Utilitaire.getJSONStatus(3);
         }
         catch (Exception e){
-            e.printStackTrace();
-            return Utilitaire.getJSONStatus(1);
+            return "{\"status\":1, \"error\":\""+ e.getMessage()+"\"}";
         }
 
         //return Utilitaire.getJSONStatus(2);
