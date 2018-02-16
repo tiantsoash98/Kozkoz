@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Profil</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content (swipe)="swipeEvent($event)" padding>
+    <ion-item>
+        <ion-avatar item-start>
+            <ion-img src="assets/imgs/avatar-member.jpg" id="profil-icon"></ion-img>
+        </ion-avatar>
+        <h2>{{connected.prenom}} {{connected.nom}}</h2>
+        <h3 *ngIf="(activiteService.statut != '')">{{activiteService.statut}}</h3>
+        <h3 *ngIf="(activiteService.statut == '')" (tap)="statut()" class="statut">Définir un statut</h3>
+    </ion-item>
+
+    <ion-list padding-top>
+        <ion-item (tap)="statut()"><ion-icon name="md-quote" item-start></ion-icon> Modifier le statut</ion-item>
+    </ion-list>
+    
+    <div padding>
+        <button (tap)="disconnect()" ion-button block color="danger">Se déconnecter</button>  
+    </div>
+</ion-content>
+      

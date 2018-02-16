@@ -1,0 +1,62 @@
+$background: #f9f9f9;
+$backColorLeft : #e6e6e6;
+$colorLeft: #191919;
+$backColorRight: #f9f9f9;
+$colorRight: #191919;
+
+.toolbar-title{
+    .subtitle{
+        font-size: 66%;
+        margin: 0;
+    }
+}
+
+#chat-content{
+    background: $background;
+}
+
+
+.innerMessage {
+    padding: 5px 15px 0px 15px;
+    border-radius: 20px;
+    max-width: 75%;
+}
+
+.message{
+    font-size: 120%;
+}
+
+.left{
+    float: left;
+    background-color: $backColorLeft;
+    color: $colorLeft;
+}
+
+.right{
+    float: right;
+    background-color: $backColorRight;
+    color: $colorRight;
+    border: 1px solid #c6c6c6;
+}
+
+.username{
+    font-weight: bold;
+    font-size: 80%;
+}
+
+.date{
+    color: #a1a1a1;
+    font-size: 65% !important;
+    margin-top: -7px;
+}
+
+.date-left{
+    float: left;
+}
+.date-right{
+    float: right;
+}
+
+.send{
+    padding-left: 10px;
+}
