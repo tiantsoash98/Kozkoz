@@ -1,0 +1,43 @@
+<ion-header>
+        <ion-toolbar>
+            <ion-title>
+                Explorer
+            </ion-title>
+            <ion-buttons start>
+                <button ion-button (click)="initListActifs()">
+                    <span ion-text color="primary" showWhen="ios">Actualiser</span>
+                    <ion-icon name="md-refresh"></ion-icon>
+                </button>
+            </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+<ion-content (swipe)="swipeEvent($event)" padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <h3>Explorer</h3>
+    <div padding>
+        <button (tap)="map()" ion-button block>Voir sur la carte</button>  
+    </div>
+    <ion-list>
+        <ion-label>Actifs</ion-label>
+        <div *ngFor="let actif of activiteService.listActif">
+            <ion-item *ngIf="(actif.utilisateur.id != connected.id)">               
+                <ion-avatar (tap)="message(actif.utilisateur)" (press)="actions(actif.utilisateur)" item-start>
+                    <ion-img src="assets/imgs/avatar-member.jpg" ></ion-img>
+                </ion-avatar>
+
+                <div (tap)="message(actif.utilisateur)" (press)="actions(actif.utilisateur)">
+                    <h2>{{actif.utilisateur.prenom}} {{actif.utilisateur.nom}}</h2>
+                    <h3 *ngIf="(actif.statut != '')" class="statut">{{actif.statut}}</h3>
+                    <p>{{actif.localisation.lng}} {{actif.localisation.lat}}</p>
+                </div>
+                
+                <ion-icon name="ios-hand-outline" item-end (tap)="bip(actif.utilisateur)"></ion-icon>
+            </ion-item>         
+        </div>
+    </ion-list>
+</ion-content>
+      
