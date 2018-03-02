@@ -12,11 +12,18 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Formatter;
 import java.util.Properties;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Utilitaire {
     public static  String getJSONStatus(int status){
         return "{\"status\": "+ status +"}";
+    }
+    public static  String getJSONError(String error){
+        return "{\"error\": \""+ error +"\"}";
+    }
+    public static  String getJSONError(int status, String error){
+        return "{\"status\": "+ status +", \"error\": \""+ error +"\"}";
     }
 
     public static  int generateRandomCode(int length){
@@ -94,6 +101,26 @@ public class Utilitaire {
         }
         String result = formatter.toString();
         formatter.close();
+        return result;
+    }
+
+    public static String generateAlphaNumeric(int length){
+        String[] alphabetic = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+        String result = "";
+
+        Random random = new Random();
+        int i = 0;
+
+        while(i < length){
+            if(random.nextBoolean())  // Alphabetic
+                result += alphabetic[random.nextInt(alphabetic.length)];
+
+            else // Numeric
+                result += String.valueOf(random.nextInt(10));
+
+            i++;
+        }
+
         return result;
     }
 }

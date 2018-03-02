@@ -10,15 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @NoArgsConstructor
 
-@Document(collection = "message")
-public class Message {
-    public static  int Text = 10;
-
-    @Id
+@Document(collection = "groupe")
+public class Groupe {
     private String id;
-    private String contenu;
-    private UtilisateurMessage envoyeur;
-    private UtilisateurMessage destinataire;
+    private String nom;
     private String date;
-    private int type;
+    private UtilisateurMessage createur;
+    private UtilisateurMessage[] membres;
 }
