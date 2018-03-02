@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Chats</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content (swipe)="swipeEvent($event)" padding>
+    <ion-list>
+        <ion-item-sliding *ngFor="let chat of actualisationService.chats" (tap)="message(chat)">
+            <ion-item>      
+                <ion-avatar item-start>
+                    <ion-img src="assets/imgs/avatar-member.jpg"></ion-img>
+                </ion-avatar>
+                <h2>{{chat.utilisateur.prenom}} {{chat.utilisateur.nom}}</h2>
+                <p *ngIf="(chat.messages.length > 0)">{{chat.messages[chat.messages.length -1].contenu}}</p>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button (tap)="bloquer(chat.utilisateur)" color="light">
+                    <ion-icon name="close"></ion-icon>
+                    {{chat.allow ? 'Bloquer' : 'Debloquer'}}
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>
+      

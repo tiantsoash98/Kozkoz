@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons start>
+            <button ion-button icon-only (tap)="actions()">
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+
+        <ion-title>
+            {{utilisateur.prenom}} {{utilisateur.nom}}
+            <p *ngIf="(activite.statut != '')" class="subtitle">{{activite.statut}}</p>
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding id="chat-content" #content>
+    <ion-grid>
+        <ion-row>
+            <ion-col class="message" *ngFor="let message of messages" col-12>
+                <div [class]="message.envoyeur.id == connected.id ? 'innerMessage right' : 'innerMessage left'">
+                    <div class="content">
+                        {{message.contenu}}
+
+                        <div class="date">
+                            <p [class]="message.envoyeur.id == connected.id ? 'date-right' : 'date-left'">{{message.date | slice:11:16}}</p>
+                        </div> 
+                    </div>               
+                </div>    
+            </ion-col> 
+        </ion-row>
+    </ion-grid> 
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar color="light" class="send">
+        <ion-input [(ngModel)]="message.contenu" type="text" placeholder="Votre message..."></ion-input>
+        <ion-buttons end>
+            <button ion-button icon-right (tap)="send()">
+                <ion-icon name="send" color="primary"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>
